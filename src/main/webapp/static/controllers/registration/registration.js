@@ -22,7 +22,7 @@ function register(){
 				window.location.href = "login.html";
 			},
 			error : function(e) {
-				toastr.error("Error occured.");
+				console.log("Error");
 			} 
 		});
 }
