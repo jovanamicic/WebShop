@@ -18,3 +18,19 @@ INSERT INTO `webshop`.`limit_range` (`discount`, `maximum`, `minimum`) VALUES ('
 INSERT INTO `webshop`.`category_limit` (`ccategory_id`, `limit_id`) VALUES ('1', '1');
 INSERT INTO `webshop`.`category_limit` (`ccategory_id`, `limit_id`) VALUES ('1', '2');
 INSERT INTO `webshop`.`category_limit` (`ccategory_id`, `limit_id`) VALUES ('1', '3');
+
+-- PRODUCT CATEGORY
+INSERT INTO `webshop`.`product_category` (`max_discount`, `name`) VALUES ('10', 'Consumer goods');
+INSERT INTO `webshop`.`product_category` (`max_discount`, `name`, `parent_category`) VALUES ('10', 'Cosmetics', '1');
+INSERT INTO `webshop`.`product_category` (`max_discount`, `name`, `parent_category`) VALUES ('80', 'Food', '1');
+INSERT INTO `webshop`.`product_category` (`max_discount`, `name`, `parent_category`) VALUES ('25', 'Appliances', '1');
+INSERT INTO `webshop`.`product_category` (`max_discount`, `name`, `parent_category`) VALUES ('20', 'Alcoholic drinks', '1');
+INSERT INTO `webshop`.`product_category` (`max_discount`, `name`, `parent_category`) VALUES ('20', 'Foreing alcoholic drinks', '5');
+INSERT INTO `webshop`.`product_category` (`max_discount`, `name`, `parent_category`) VALUES ('30', 'Local alcoholic drinks', '5');
+
+-- PRODUCT
+INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('ADV1','2017-06-01 00:34:01', FALSE, '50', 'Vinjak', '750', FALSE, '100', '7');
+INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('ADV2','2017-06-01 00:34:01', FALSE, '90', 'Votka Baltic', '560', FALSE, '150', '7');
+INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('ASV1','2017-06-01 00:34:01', FALSE, '10', 'Votka Smirnoff classic', '1200', FALSE, '80', '6');
+INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('ASV2','2017-06-01 00:34:01', FALSE, '5', 'Votka Smirnoff Ice', '200', FALSE, '200', '6');
+
