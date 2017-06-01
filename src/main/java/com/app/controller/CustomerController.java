@@ -5,15 +5,20 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.CategoryDTO;
+import com.app.dto.CustomerDTO;
 import com.app.dto.UserDTO;
 import com.app.dto.UserLiteDTO;
 import com.app.model.Customer;
+import com.app.model.CustomerCategory;
 import com.app.model.User;
+import com.app.service.CustomerCategoryService;
 import com.app.service.CustomerService;
 import com.app.service.UserService;
 
@@ -23,6 +28,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private CustomerCategoryService customerCategoryService;
 	
 	@Autowired
 	private UserService userService;
@@ -40,6 +48,9 @@ public class CustomerController {
 		newC.setPassword(dto.getPassword());
 		newC.setRegDate(new Date());
 		newC.setPoints(0);
+		newC.setAddress(dto.getAddress());
+		CustomerCategory cc = customerCategoryService.findByName("basic");
+		newC.setCcategory(cc);
 		customerService.save(newC);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
@@ -59,4 +70,13 @@ public class CustomerController {
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 
+	@RequestMapping(value="/{username}", method = RequestMethod.GET)
+	public ResponseEntity<CustomerDTO> getCustomer(@PathVariable String username){
+		Customer c = customerService.findByUsername(username);
+		if (c == null){
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		CustomerDTO retVal = new CustomerDTO(c.getName(), c.getSurname(), c.getUsername(), c.getRegDate(), c.getAddress(), c.getPoints(), c.getCcategory().getName());
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
 }

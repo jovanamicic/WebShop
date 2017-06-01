@@ -15,6 +15,10 @@ public class CustomerService {
 	public Customer save(Customer newC) {
 		return repo.save(newC);
 	}
+
+	public Customer findByUsername(String username) {
+		return repo.findByUsername(username);
+	}
 	
 	
 

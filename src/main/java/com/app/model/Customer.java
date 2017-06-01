@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +21,10 @@ public class Customer extends User implements Serializable {
 	
 	@Column(name = "points", unique = false, nullable = true)
 	private int points;
+	
+	@ManyToOne
+	@JoinColumn(name="ccategory", referencedColumnName = "ccategory_id", nullable = true)
+	private CustomerCategory ccategory;
 	
 	public Customer(){
 		super();
@@ -40,5 +46,12 @@ public class Customer extends User implements Serializable {
 		this.points = points;
 	}
 
+	public CustomerCategory getCcategory() {
+		return ccategory;
+	}
+
+	public void setCcategory(CustomerCategory ccategory) {
+		this.ccategory = ccategory;
+	}
 
 }

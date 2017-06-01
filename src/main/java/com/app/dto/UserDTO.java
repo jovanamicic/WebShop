@@ -6,6 +6,7 @@ public class UserDTO {
 	private String surname;
 	private String username;
 	private String password;
+	private String address;
 	
 	public UserDTO(){}
 
@@ -40,7 +41,13 @@ public class UserDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 }
