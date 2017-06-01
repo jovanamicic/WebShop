@@ -15,6 +15,7 @@ import com.app.dto.ProductCategoryDTO;
 import com.app.dto.ProductDTO;
 import com.app.model.Product;
 import com.app.model.ProductCategory;
+import com.app.service.ProductCategoryService;
 import com.app.service.ProductService;
 
 @RestController
@@ -23,6 +24,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ProductCategoryService productCategoryService;
 	
 	@RequestMapping(value="/{key}", method = RequestMethod.GET)
 	public ResponseEntity<List<ProductDTO>> findProducts(@PathVariable String key){
@@ -39,6 +43,27 @@ public class ProductController {
 					retVal.add(dto);
 				}
 			}
+		}
+		if (retVal.isEmpty()){
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/category/{key}", method = RequestMethod.GET)
+	public ResponseEntity<List<ProductDTO>> findProductByCategory(@PathVariable String key){
+		ProductCategory pc = productCategoryService.findById(Integer.parseInt(key));
+		List<Product> products = productService.findByProductCategory(pc);
+		if (products.isEmpty()){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		List<ProductDTO> retVal = new ArrayList<ProductDTO>();
+		for (Product pid : products) {
+				if (!pid.isDeleted() && pid.getStock() > 0){
+					ProductCategoryDTO category = new ProductCategoryDTO(pid.getProductCategory().getId(), pid.getProductCategory().getName());
+					ProductDTO dto = new ProductDTO(pid.getId(), pid.getName(), category , pid.getStock(), pid.getPrice());
+					retVal.add(dto);
+				}
 		}
 		if (retVal.isEmpty()){
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

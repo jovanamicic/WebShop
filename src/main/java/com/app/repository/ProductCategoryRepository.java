@@ -6,4 +6,5 @@ import com.app.model.ProductCategory;
 
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Integer>{
 
+	ProductCategory findById(int id);
 }

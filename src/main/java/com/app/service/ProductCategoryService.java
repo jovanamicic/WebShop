@@ -18,4 +18,8 @@ public class ProductCategoryService {
 		return repo.findAll();
 	}
 
+	public ProductCategory findById(int key) {
+		return repo.findById(key);
+	}
+
 }
