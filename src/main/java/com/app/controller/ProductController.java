@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.PriceSearchDTO;
 import com.app.dto.ProductCategoryDTO;
 import com.app.dto.ProductDTO;
 import com.app.model.Product;
@@ -70,5 +72,25 @@ public class ProductController {
 		}
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/price", method = RequestMethod.POST, consumes = "application/json")
+	public ResponseEntity<List<ProductDTO>> findProductByCategory(@RequestBody PriceSearchDTO pdto){
+		double from = Double.parseDouble(pdto.getMinPrice());
+		double to = Double.parseDouble(pdto.getMaxPrice());
+		List<Product> products = productService.findAll();
+		List<ProductDTO> retVal = new ArrayList<ProductDTO>();
+		if (products.isEmpty()){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		for (Product pid : products) {
+			if (pid.getPrice() >= from && pid.getPrice() <= to){
+				ProductCategoryDTO category = new ProductCategoryDTO(pid.getProductCategory().getId(), pid.getProductCategory().getName());
+				ProductDTO dto = new ProductDTO(pid.getId(), pid.getName(), category , pid.getStock(), pid.getPrice());
+				retVal.add(dto);
+			}
+		}
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
+	
 
 }

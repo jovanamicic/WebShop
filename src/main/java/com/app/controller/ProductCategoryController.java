@@ -28,9 +28,12 @@ public class ProductCategoryController {
 		if (categories.isEmpty()){
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+
 		for (ProductCategory pc : categories) {
-			ProductCategoryDTO dto = new ProductCategoryDTO(pc.getId(),pc.getName());
-			retVal.add(dto);
+			if (pc.getParentCategory() != null && pc.getParentCategory().getId() != 1){
+				ProductCategoryDTO dto = new ProductCategoryDTO(pc.getId(),pc.getName());
+				retVal.add(dto);
+			}
 		}
 		
 		return new ResponseEntity<>(retVal, HttpStatus.OK);

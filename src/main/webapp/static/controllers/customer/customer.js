@@ -22,7 +22,7 @@ function fillTable(data, table){
 	document.getElementById("errorMsg").style.display = "none";
 	document.getElementById("results").style.display = "block";
 	$('#search').val("");
-	$("#tableData tr").remove(); 
+	$("#tableData tr").remove();
 	var list = data == null ? [] : (data instanceof Array ? data
 			: [ data ]);
 	$.each(list, function(index, p) {
@@ -47,12 +47,20 @@ function fillTable(data, table){
 	});
 }
 
+function JSONPriceSearch(minPrice, maxPrice) {
+	return JSON.stringify({
+		"minPrice" : minPrice,
+		"maxPrice" : maxPrice
+	});
+}
+
+
 function find(){
 	var search = $('#search').val();
 	var minPrice = $('#minPrice').val();
 	var maxPrice = $('#maxPrice').val();
 	var category = $('#category').val();
-	var table = document.getElementById("productsTable");
+	var table = document.getElementById("tableData");
 	
 	
 	if (search != ""){
@@ -70,7 +78,20 @@ function find(){
 		});
 	}
 	else if (minPrice != "" && maxPrice != ""){
-		//TODO zavrisiti price range
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			dataType : "json",
+			url : "/products/price",
+			data: JSONPriceSearch(minPrice, maxPrice),
+			success : function(data) {
+				fillTable(data, table);
+			},
+			error : function(e) {
+				document.getElementById("errorMsg").style.display = "inline";
+				$('#search').val("");
+			}
+		});
 	}
 	else if (category != ""){
 		$.ajax({
