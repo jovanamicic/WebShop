@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="static/assets/css/main.css" />
 </head>
-<body onLoad="loadAllPCategories(), loadPCategory()">
+<body onLoad="loadAllPCategories()">
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -32,10 +32,9 @@
 						Home</a></li>
 				<li><a href="managerCCategories.html" class="icon fa-user">&nbsp;
 						Customer categories</a></li>
-				<li><a href="managerPCategories.html"
-					class="icon fa-shopping-cart">&nbsp; Product categories</a></li>
-				<li><a href="managerActionEvents.html" class="icon fa-bell">&nbsp;
-						Action events</a></li>
+				<li><a href="managerPCategories.html" class="icon fa-shopping-cart">&nbsp;
+						Product categories</a></li>
+				<li><a href="managerActionEvents.html" class="icon fa-bell">&nbsp; Action events</a></li>
 				<li><a onClick="logout()" class="icon fa-sign-out">&nbsp;
 						Logout</a></li>
 			</ul>
@@ -46,36 +45,39 @@
 		<div id="main">
 			<div class="inner">
 				<header>
-					<h1>Edit product category</h1>
+					<h1>New holiday action</h1>
 				</header>
 
 				<!-- CONTENT -->
 				<section>
 					<form>
 						<div class="row uniform" id="inner">
-						<div class="6u$">
-								<input type="text" placeholder="Id" id="id" disabled />
-							</div>
 							<div class="6u$">
 								<input type="text" placeholder="Name" id="name" required />
 							</div>
 							<div class="6u$">
-								<input type="text" placeholder="Maximum discount"
-									id="maxDiscount" required />
+								<input type="text" placeholder="From" title="dd-mm-yyyy"
+									id="from" required />
+							</div>
+							<div class="6u$">
+								<input type="text" placeholder="To" id="to" required />
+							</div>
+							<div class="6u$">
+								<input type="text" placeholder="Discount" id="discount" required />
 							</div>
 							<div class="6u$">
 								<div class="select-wrapper">
-									<select id="category">
+									<select id="category" multiple>
 										<option value="">- Category -</option>
 									</select>
 								</div>
 							</div>
 							<div class="12u$">
-								<h5 id="errorUpdate" style="display: none;">*All fields are
+								<h5 id="error" style="display: none;">*All fields are
 									required!</h5>
 								<ul class="actions">
-									<li><a class="special button" onClick="updatePC()">Save</a></li>
-									<li><a href="managerPCategories.html" class="button">Cancel</a></li>
+									<li><a class="special button" onClick="addNewAction()">Save</a></li>
+									<li><a href="managerActionEvents.html" class="button">Cancel</a></li>
 								</ul>
 							</div>
 						</div>
@@ -133,5 +135,6 @@
 	<script src="static/assets/js/main.js"></script>
 	<script src="static/controllers/logout/logout.js"></script>
 	<script src="static/controllers/manager/managerPCategories.js"></script>
+	<script src="static/controllers/manager/managerActions.js"></script>
 </body>
 </html>

@@ -100,6 +100,6 @@ public class ProductCategoryController {
 		pc.setMaxDiscount(Integer.parseInt(dto.getMaxDiscount()));
 		pc.setParentCategory(parentCategory);
 		productCategoryService.save(pc);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

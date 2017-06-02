@@ -34,3 +34,15 @@ INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minim
 INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('ASV1','2017-06-01 00:34:01', FALSE, '10', 'Votka Smirnoff classic', '1200', FALSE, '80', '6');
 INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('ASV2','2017-06-01 00:34:01', FALSE, '5', 'Votka Smirnoff Ice', '200', FALSE, '200', '6');
 
+-- ACTION
+INSERT INTO `webshop`.`action` (`discount`, `from_date`, `name`, `to_date`) VALUES ('10', '2017-01-01 00:34:01', 'Ortodox christmas discount', '2017-01-08 00:34:01');
+INSERT INTO `webshop`.`action` (`discount`, `from_date`, `name`, `to_date`) VALUES ('50', '2016-12-31 00:34:01', 'New Year action', '2017-01-01 00:34:01');
+INSERT INTO `webshop`.`action` (`discount`, `from_date`, `name`, `to_date`) VALUES ('25', '2017-04-30 00:34:01', '1. May Spring sale', '2017-05-01 00:34:01');
+
+-- ACTION PCATEGORY
+INSERT INTO `webshop`.`action_pcategory` (`action_id`, `product_category_id`) VALUES ('1', '6');
+INSERT INTO `webshop`.`action_pcategory` (`action_id`, `product_category_id`) VALUES ('1', '7');
+INSERT INTO `webshop`.`action_pcategory` (`action_id`, `product_category_id`) VALUES ('2', '3');
+INSERT INTO `webshop`.`action_pcategory` (`action_id`, `product_category_id`) VALUES ('3', '7');
+INSERT INTO `webshop`.`action_pcategory` (`action_id`, `product_category_id`) VALUES ('3', '6');
+INSERT INTO `webshop`.`action_pcategory` (`action_id`, `product_category_id`) VALUES ('3', '3');

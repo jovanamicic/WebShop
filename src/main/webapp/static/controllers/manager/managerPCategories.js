@@ -53,6 +53,7 @@ function loadPCategory(){
 		url : "/productCategories/"+id,
 		success : function(data) {
 			$('#name').val(data.name);
+			$('#id').val(data.id);
 			$('#maxDiscount').val(data.maxDiscount);
 			document.getElementById("category").options.selectedIndex = data.category.id;
 		},
@@ -115,7 +116,7 @@ function fillTable(data, table){
 		id.innerHTML = p.id;
 		name.innerHTML = p.name;
 		category.innerHTML = p.category ? p.category.name : "No category";
-		maxDiscount.innerHTML = p.maxDiscount;
+		maxDiscount.innerHTML = p.maxDiscount + "%";
 		edit.innerHTML = "<a href=\"managerEditPCategory.html?id="+p.id+"\"class=\"icon fa-pencil\"></a>";
 	});
 }

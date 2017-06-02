@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="static/assets/css/main.css" />
 </head>
-<body>
+<body onLoad="loadActions()">
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -41,15 +41,32 @@
 		</nav>
 
 		<!-- Main -->
+		<!-- Main -->
 		<div id="main">
 			<div class="inner">
 				<header>
-					<h1>Manager Dashboard</h1>
+					<h1 style="float:left">Holiday actions</h1>
+					<a href="managerNewAction.html" class="icon button special fa-plus" style="float:right">&nbsp;
+							New action</a>
 				</header>
 
-				<!-- CONTENT -->
+				<!-- CONTENT -->				
 				<section>
-					
+					<table id="table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>From</th>
+								<th>To</th>
+								<th>Discount</th>
+								<th>Categories</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tbody id="tableBody">
+						</tbody>
+					</table>
 				</section>
 			</div>
 		</div>
@@ -102,5 +119,6 @@
 	<script src="static/assets/js/util.js"></script>
 	<script src="static/assets/js/main.js"></script>
 	<script src="static/controllers/logout/logout.js"></script>
+	<script src="static/controllers/manager/managerActions.js"></script>
 </body>
 </html>
