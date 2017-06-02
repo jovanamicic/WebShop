@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="static/assets/css/main.css" />
 </head>
-<body onLoad="loadCategories()">
+<body onLoad = "loadPCategories();">
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -28,72 +28,43 @@
 		<nav id="menu">
 			<h2>Menu</h2>
 			<ul>
-				<li><a href="customer.html" class="icon fa-home"> &nbsp;
+				<li><a href="manager.html" class="icon fa-home"> &nbsp;
 						Home</a></li>
-				<li><a href="customerProfile.html" class="icon fa-user">&nbsp;
-						My profile</a></li>
-				<li><a href="generic.html" class="icon fa-shopping-cart">&nbsp;
-						Shopping chart</a></li>
-				<li><a href="generic.html" class="icon fa-bars">&nbsp; My
-						orders</a></li>
+				<li><a href="managerCCategories.html" class="icon fa-user">&nbsp;
+						Customer categories</a></li>
+				<li><a href="managerPCategories.html" class="icon fa-shopping-cart">&nbsp;
+						Product categories</a></li>
+				<li><a href="managerActionEvents.html" class="icon fa-bell">&nbsp; Action events</a></li>
 				<li><a onClick="logout()" class="icon fa-sign-out">&nbsp;
 						Logout</a></li>
 			</ul>
 		</nav>
 
 		<!-- Main -->
+		<!-- Main -->
 		<div id="main">
 			<div class="inner">
 				<header>
-					<h1>It has everything you need. We provide you full and safe
-						service. With just one click.</h1>
+					<h1 style="float:left">Product categories</h1>
+					<a href="managerNewPCategory.html" class="icon button special fa-plus" style="float:right">&nbsp;
+							New category</a>
 				</header>
-				
-				<!-- SEARCH -->
+
+				<!-- CONTENT -->				
 				<section>
-					<div class="row uniform">
-						<div class="12u$ 12u$(xsmall)">
-							<input type="text" placeholder="Type keywords here to search..." id="search" />
-						</div>
-						<div class="2u 12u$(xsmall)">
-							<input type="text" placeholder="Minumum price" id="minPrice" />
-						</div>
-						<div class="2u 12u$(xsmall)">
-							<input type="text" placeholder="Maximum price" id="maxPrice" />
-						</div>
-						<div class="4u 12u$(xsmall)">
-							<div class="select-wrapper">
-								<select id="category">
-									<option value=""> - Category - </option>
-								</select>
-							</div>
-						</div>
-						<div class="4u$ 12u$(xsmall)">
-							<a class=" button icon fa-search fit" onClick="find()">Find</a>
-						</div>
-					<span style="display:none;" id="errorMsg">No results. Please try again.</span>
-					</div>
-				</section>
-				<!-- PRODUCTS -->
-				<p></p>
-				<section style="display: none;" id="results">
-					<h1>Here are results...</h1>
-					<div class="table-wrapper">
-						<table id="productsTable">
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Name</th>
-									<th>Category</th>
-									<th>Price</th>
-									<th>Stock</th>
-									<th>Buy</th>
-								</tr>
-							</thead>
-							<tbody id="tableData">
-							</tbody>
-						</table>
-					</div>
+					<table id="table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Category</th>
+								<th>Max discount</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tbody id="tableBody">
+						</tbody>
+					</table>
 				</section>
 			</div>
 		</div>
@@ -145,7 +116,7 @@
 	<script src="static/assets/js/skel.min.js"></script>
 	<script src="static/assets/js/util.js"></script>
 	<script src="static/assets/js/main.js"></script>
-	<script src="static/controllers/customer/customer.js"></script>
 	<script src="static/controllers/logout/logout.js"></script>
+	<script src="static/controllers/manager/managerPCategories.js"></script>
 </body>
 </html>

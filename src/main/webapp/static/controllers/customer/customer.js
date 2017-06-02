@@ -30,20 +30,19 @@ function fillTable(data, table){
 		row.style.cursor = "pointer";
 		row.classList.add('tableHover');
 
-		var name = row.insertCell(0);
-		var category = row.insertCell(1);
-		var price = row.insertCell(2);
-		var stock = row.insertCell(3);
-		var buy = row.insertCell(4);
-		var id = row.insertCell(5);
+		var id = row.insertCell(0);
+		var name = row.insertCell(1);
+		var category = row.insertCell(2);
+		var price = row.insertCell(3);
+		var stock = row.insertCell(4);
+		var buy = row.insertCell(5);
 		
+		id.innerHTML = p.id;
 		name.innerHTML = p.name;
 		category.innerHTML = p.category.name;
 		price.innerHTML = p.price;
 		stock.innerHTML = p.stock;
-		buy.innerHTML = "<a href=\"#\" class=\"icon fa-shopping-cart\"></a>"
-		id.innerHTML = p.id;
-		id.style.visibility = 'hidden';
+		buy.innerHTML = "<a href=\"#\" id=\""+p.id+"\" class=\"icon fa-shopping-cart\"></a>"
 	});
 }
 

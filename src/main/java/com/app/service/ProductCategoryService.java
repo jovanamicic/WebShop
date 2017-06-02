@@ -22,4 +22,9 @@ public class ProductCategoryService {
 		return repo.findById(key);
 	}
 
+	public ProductCategory save(ProductCategory pc) {
+		return repo.save(pc);
+		
+	}
+
 }

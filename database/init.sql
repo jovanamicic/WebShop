@@ -1,7 +1,7 @@
 -- CCATEGORY
-INSERT INTO `webshop`.`ccategory` (`name`) VALUES ('basic');
-INSERT INTO `webshop`.`ccategory` (`name`) VALUES ('silver');
-INSERT INTO `webshop`.`ccategory` (`name`) VALUES ('gold');
+INSERT INTO `webshop`.`ccategory` (`name`) VALUES ('Basic customer');
+INSERT INTO `webshop`.`ccategory` (`name`) VALUES ('Silver customer');
+INSERT INTO `webshop`.`ccategory` (`name`) VALUES ('Gold customer');
 
 -- USERS
 INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `reg_date`, `role`, `surname`) VALUES ('MANAGER', 'mina', 'Mina', 'mina', '2017-06-01 00:34:11', 'manager', 'Medic');
