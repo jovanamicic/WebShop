@@ -42,7 +42,7 @@ function fillTable(data, table){
 		category.innerHTML = p.category.name;
 		price.innerHTML = p.price;
 		stock.innerHTML = p.stock;
-		buy.innerHTML = "<a href=\"#\" id=\""+p.id+"\" class=\"icon fa-shopping-cart\"></a>"
+		buy.innerHTML = "<a href=\"customerAddToChart.html?id="+p.id+"\" class=\"icon fa-shopping-cart\"></a>"
 	});
 }
 

@@ -31,4 +31,8 @@ public class ProductService {
 		return repo.findByProductCategory(key);
 	}
 
+	public Product findOneById(String id) {
+		return repo.findById(id).get(0);
+	}
+
 }

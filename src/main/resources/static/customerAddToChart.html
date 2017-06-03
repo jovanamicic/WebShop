@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="static/assets/css/main.css" />
 </head>
-<body onLoad="loadCCategory()">
+<body onLoad="loadProduct()">
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -28,72 +28,62 @@
 		<nav id="menu">
 			<h2>Menu</h2>
 			<ul>
-				<li><a href="manager.html" class="icon fa-home"> &nbsp;
+				<li><a href="customer.html" class="icon fa-home"> &nbsp;
 						Home</a></li>
-				<li><a href="managerCCategories.html" class="icon fa-user">&nbsp;
-						Customer categories</a></li>
-				<li><a href="managerPCategories.html"
-					class="icon fa-shopping-cart">&nbsp; Product categories</a></li>
-				<li><a href="managerActionEvents.html" class="icon fa-bell">&nbsp;
-						Action events</a></li>
+				<li><a href="customerProfile.html" class="icon fa-user">&nbsp;
+						My profile</a></li>
+				<li><a href="generic.html" class="icon fa-shopping-cart">&nbsp;
+						Shopping cart</a></li>
+				<li><a href="generic.html" class="icon fa-bars">&nbsp; My
+						orders</a></li>
 				<li><a onClick="logout()" class="icon fa-sign-out">&nbsp;
 						Logout</a></li>
 			</ul>
 		</nav>
 
 		<!-- Main -->
-		<!-- Main -->
 		<div id="main">
-			<div class="inner">
+			<div style="width: 85%; margin: 0 auto;">
 				<header>
-					<h1>Edit customer category</h1>
+					<h1>Add to chart</h1>
 				</header>
-
+				
 				<!-- CONTENT -->
 				<section>
 					<form>
 						<div class="row uniform" id="inner">
 							<div class="6u$">
-							<b>ID</b>	<input type="text" placeholder="Id" id="id" disabled />
+								<b>ID</b> <input type="text" placeholder="Id" id="id" disabled />
 							</div>
 							<div class="6u$">
-							<b>Name</b>	<input type="text" placeholder="Name" id="name" disabled />
+								<b>Name</b> <input type="text" placeholder="Name" id="name" disabled />
 							</div>
 							<div class="6u$">
-								<h1>Limits</h1>
-								<span id="noLimits" style="display:none;">There is no limits.
-								</span>
-								<a onClick="addLimit()">Add new limit</a>
+								<b>Category</b> <input type="text" placeholder="Category" id="category" disabled />
 							</div>
 							<div class="6u$">
-								<ul class="alt" id="limitsList">
-								</ul>
+								<b>Price</b> <input type="text" placeholder="Price" id="price" disabled />
 							</div>
-							<div class="6u$" id="addLimitForm" style="display:none;">
-								<h1>Add new limit</h1>
-								<div class="6u$">
-									<input type="text" placeholder="From" id="from"/>
-								</div>
-								<div class="6u$">
-									<input type="text" placeholder="To" id="to"/>
-								</div>
-								<div class="6u$">
-									<input type="text" placeholder="Discount" id="discount"/>
-								</div>
-								<ul class="actions" id="newLimitBtns">
-									<li><a class="special button" onClick="addLimitInList()">Add</a></li>
-									<li><a onClick="hideAddLimitForm()" class="button">Cancel</a></li>
-								</ul>
+							<div class="6u$">
+								<b>Stock</b> <input type="text" id="stock" disabled />
+							</div>
+							<div class="6u$">
+								<b>Quantity</b> <input type="text" placeholder="Quantity" id="quantity" onfocusout="showTotalPrice()" />
+							</div>
 							</div>
 							<div class="12u$">
-								<ul class="actions" id="saveCCBtns" style="display:block;">
-									<li><a class="special button" onClick="updateCC()">Save</a></li>
-									<li><a href="managerCCategories.html" class="button">Cancel</a></li>
+								<br>
+								<h5 id="totalPrice" style="display: none;">Total price: <span id="total"></span></h5>
+								<h5 id="error" style="display: none;">You chose too many products!</h5>
+								<ul class="actions">
+									<li><a class="special button" onClick="addToCart()">Add to cart</a></li>
+									<li><a href="customer.html" class="button">Cancel</a></li>
 								</ul>
 							</div>
 						</div>
 					</form>
 				</section>
+				
 			</div>
 		</div>
 
@@ -145,6 +135,6 @@
 	<script src="static/assets/js/util.js"></script>
 	<script src="static/assets/js/main.js"></script>
 	<script src="static/controllers/logout/logout.js"></script>
-	<script src="static/controllers/manager/managerCCategories.js"></script>
+	<script src="static/controllers/customer/customerShoppingCart.js"></script>
 </body>
 </html>

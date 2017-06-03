@@ -149,13 +149,13 @@ function addNewAction(){
 
 function updateAction(){
 	var nameA = $('#name').val();
-	var discount = $('#discount').val();
-	var from = $('#from').val();
-	var to = $('#to').val();
+	var discountA = $('#discount').val();
+	var fromA = $('#from').val();
+	var toA = $('#to').val();
 	var cId = $('#category').val();
-	var id = getParam("id");
+	var idA = getParam("id");
 	
-	if (nameA == "" || discount == "" || from == "" || to == "" || category == ""){
+	if (nameA == "" || discountA == "" || fromA == "" || toA == "" || cId == ""){
 		document.getElementById("error").style.display = "inline";
 	}
 	else{
@@ -173,8 +173,8 @@ function updateAction(){
 		$.ajax({
 			type : "PUT",
 			contentType: "application/json",
-			url : "/actions/"+id,
-			data : JSONNewAction(nameA,discount,from,to,categories),
+			url : "/actions/"+idA,
+			data : JSONNewAction(nameA,discountA,fromA,toA,categories),
 			success : function() {
 				window.location.href = "managerActionEvents.html";
 			},

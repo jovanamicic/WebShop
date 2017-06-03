@@ -92,5 +92,15 @@ public class ProductController {
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value="/find/{id}", method = RequestMethod.GET)
+	public ResponseEntity<ProductDTO> getOne(@PathVariable String id){
+		Product p = productService.findOneById(id);
+		if (p == null){
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		ProductCategoryDTO category = new ProductCategoryDTO(p.getProductCategory().getId(), p.getProductCategory().getName());
+		ProductDTO retVal = new ProductDTO(p.getId(), p.getName(), category, p.getStock(), p.getPrice());
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
 
 }

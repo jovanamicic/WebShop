@@ -2,11 +2,13 @@ package com.app.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.ActionDTO;
-import com.app.dto.ProductCategoruFullDTO;
 import com.app.dto.ProductCategoryDTO;
 import com.app.model.Action;
 import com.app.model.ProductCategory;
@@ -82,11 +83,11 @@ public class ActionsController {
 		Set<ProductCategory> categories = new HashSet<ProductCategory>();
 		for (ProductCategoryDTO pcdto : dto.getCategories()) {
 			ProductCategory pc = productCategoryService.findById(pcdto.getId());
-			if (a.getCategories().contains(pcdto))
 			categories.add(pc);
 		}
 		a.setCategories(categories);
 		actionService.save(a);
+		
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
