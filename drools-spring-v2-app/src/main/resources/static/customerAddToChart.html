@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>WebShop</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="static/assets/css/main.css" />
+</head>
+<body onLoad="loadProduct()">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+				<div class="12u$">
+					<span class="image fit"><img src="static/images/pic13.jpg"
+						alt=""></span>
+				</div>
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="customer.html" class="icon fa-home"> &nbsp;
+						Home</a></li>
+				<li><a href="customerProfile.html" class="icon fa-user">&nbsp;
+						My profile</a></li>
+				<li><a href="generic.html" class="icon fa-shopping-cart">&nbsp;
+						Shopping cart</a></li>
+				<li><a href="generic.html" class="icon fa-bars">&nbsp; My
+						orders</a></li>
+				<li><a onClick="logout()" class="icon fa-sign-out">&nbsp;
+						Logout</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div style="width: 85%; margin: 0 auto;">
+				<header>
+					<h1>Add to chart</h1>
+				</header>
+				
+				<!-- CONTENT -->
+				<section>
+					<form>
+						<div class="row uniform" id="inner">
+							<div class="6u$">
+								<b>ID</b> <input type="text" placeholder="Id" id="id" disabled />
+							</div>
+							<div class="6u$">
+								<b>Name</b> <input type="text" placeholder="Name" id="name" disabled />
+							</div>
+							<div class="6u$">
+								<b>Category</b> <input type="text" placeholder="Category" id="category" disabled />
+							</div>
+							<div class="6u$">
+								<b>Price</b> <input type="text" placeholder="Price" id="price" disabled />
+							</div>
+							<div class="6u$">
+								<b>Stock</b> <input type="text" id="stock" disabled />
+							</div>
+							<div class="6u$">
+								<b>Quantity</b> <input type="text" placeholder="Quantity" id="quantity" onfocusout="showTotalPrice()" />
+							</div>
+							</div>
+							<div class="12u$">
+								<br>
+								<h5 id="totalPrice" style="display: none;">Total price: <span id="total"></span></h5>
+								<h5 id="error" style="display: none;">You chose too many products!</h5>
+								<ul class="actions">
+									<li><a class="special button" onClick="addToCart()">Add to cart</a></li>
+									<li><a href="customer.html" class="button">Cancel</a></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</section>
+				
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<section>
+					<h2>Get in touch</h2>
+					<form method="post" action="#">
+						<div class="field half first">
+							<input type="text" name="name" id="name" placeholder="Name" />
+						</div>
+						<div class="field half">
+							<input type="email" name="email" id="email" placeholder="Email" />
+						</div>
+						<div class="field">
+							<textarea name="message" id="message" placeholder="Message"></textarea>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Send" class="special" /></li>
+						</ul>
+					</form>
+				</section>
+				<section>
+					<h2>Follow</h2>
+					<ul class="icons">
+						<li><a href="#" class="icon style2 fa-facebook"><span
+								class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon style2 fa-instagram"><span
+								class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon style2 fa-phone"><span
+								class="label">Phone</span></a></li>
+						<li><a href="#" class="icon style2 fa-envelope-o"><span
+								class="label">Email</span></a></li>
+					</ul>
+				</section>
+				<ul class="copyright">
+					<li>&copy; All rights reserved</li>
+					<li>Design by Jo</li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="static/assets/js/jquery.min.js"></script>
+	<script src="static/assets/js/skel.min.js"></script>
+	<script src="static/assets/js/util.js"></script>
+	<script src="static/assets/js/main.js"></script>
+	<script src="static/controllers/logout/logout.js"></script>
+	<script src="static/controllers/customer/customerShoppingCart.js"></script>
+</body>
+</html>

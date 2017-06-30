@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>WebShop</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="static/assets/css/main.css" />
+</head>
+<body onLoad="getCustomer()">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+				<div class="12u$">
+					<span class="image fit"><img src="static/images/pic13.jpg"
+						alt=""></span>
+				</div>
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="customer.html" class="icon fa-home"> &nbsp;
+						Home</a></li>
+				<li><a href="customerProfile.html" class="icon fa-user">&nbsp;
+						My profile</a></li>
+				<li><a href="generic.html" class="icon fa-shopping-cart">&nbsp;
+						Shopping cart</a></li>
+				<li><a href="generic.html" class="icon fa-bars">&nbsp; My
+						orders</a></li>
+				<li><a onClick="logout()" class="icon fa-sign-out">&nbsp;
+						Logout</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div style="width: 85%; margin: 0 auto;">
+				<header>
+					<h1 style="align:center">Hello <span id="nameSurname"></span>!</h1>
+					<h2>Username: <span id="username"></span> </h2>
+					<h2>Points: <span id="points"></span> </h2>
+					<h2>Status: <span id="ccategory"></span> </h2>
+					<h2>Address: <span id="address"></span></h2>
+					<h2>Registration date: <span id="regDate"></span> </h2>
+				</header>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<section>
+					<h2>Get in touch</h2>
+					<form method="post" action="#">
+						<div class="field half first">
+							<input type="text" name="name" id="name" placeholder="Name" />
+						</div>
+						<div class="field half">
+							<input type="email" name="email" id="email" placeholder="Email" />
+						</div>
+						<div class="field">
+							<textarea name="message" id="message" placeholder="Message"></textarea>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Send" class="special" /></li>
+						</ul>
+					</form>
+				</section>
+				<section>
+					<h2>Follow</h2>
+					<ul class="icons">
+						<li><a href="#" class="icon style2 fa-facebook"><span
+								class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon style2 fa-instagram"><span
+								class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon style2 fa-phone"><span
+								class="label">Phone</span></a></li>
+						<li><a href="#" class="icon style2 fa-envelope-o"><span
+								class="label">Email</span></a></li>
+					</ul>
+				</section>
+				<ul class="copyright">
+					<li>&copy; All rights reserved</li>
+					<li>Design by Jo</li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="static/assets/js/jquery.min.js"></script>
+	<script src="static/assets/js/skel.min.js"></script>
+	<script src="static/assets/js/util.js"></script>
+	<script src="static/assets/js/main.js"></script>
+	<script src="static/controllers/logout/logout.js"></script>
+	<script src="static/controllers/customer/customerProfile.js"></script>
+</body>
+</html>

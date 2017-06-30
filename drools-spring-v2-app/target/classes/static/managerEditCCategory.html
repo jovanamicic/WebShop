@@ -1,0 +1,150 @@
+<html>
+<head>
+<title>WebShop</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="static/assets/css/main.css" />
+</head>
+<body onLoad="loadCCategory()">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+				<div class="12u$">
+					<span class="image fit"><img src="static/images/pic13.jpg"
+						alt=""></span>
+				</div>
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="manager.html" class="icon fa-home"> &nbsp;
+						Home</a></li>
+				<li><a href="managerCCategories.html" class="icon fa-user">&nbsp;
+						Customer categories</a></li>
+				<li><a href="managerPCategories.html"
+					class="icon fa-shopping-cart">&nbsp; Product categories</a></li>
+				<li><a href="managerActionEvents.html" class="icon fa-bell">&nbsp;
+						Action events</a></li>
+				<li><a onClick="logout()" class="icon fa-sign-out">&nbsp;
+						Logout</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<header>
+					<h1>Edit customer category</h1>
+				</header>
+
+				<!-- CONTENT -->
+				<section>
+					<form>
+						<div class="row uniform" id="inner">
+							<div class="6u$">
+							<b>ID</b>	<input type="text" placeholder="Id" id="id" disabled />
+							</div>
+							<div class="6u$">
+							<b>Name</b>	<input type="text" placeholder="Name" id="name" disabled />
+							</div>
+							<div class="6u$">
+								<h1>Limits</h1>
+								<span id="noLimits" style="display:none;">There is no limits.
+								</span>
+								<a onClick="addLimit()">Add new limit</a>
+							</div>
+							<div class="6u$">
+								<ul class="alt" id="limitsList">
+								</ul>
+							</div>
+							<div class="6u$" id="addLimitForm" style="display:none;">
+								<h1>Add new limit</h1>
+								<div class="6u$">
+									<input type="text" placeholder="From" id="from"/>
+								</div>
+								<div class="6u$">
+									<input type="text" placeholder="To" id="to"/>
+								</div>
+								<div class="6u$">
+									<input type="text" placeholder="Discount" id="discount"/>
+								</div>
+								<ul class="actions" id="newLimitBtns">
+									<li><a class="special button" onClick="addLimitInList()">Add</a></li>
+									<li><a onClick="hideAddLimitForm()" class="button">Cancel</a></li>
+								</ul>
+							</div>
+							<div class="12u$">
+								<ul class="actions" id="saveCCBtns" style="display:block;">
+									<li><a class="special button" onClick="updateCC()">Save</a></li>
+									<li><a href="managerCCategories.html" class="button">Cancel</a></li>
+								</ul>
+							</div>
+						</div>
+					</form>
+				</section>
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<section>
+					<h2>Get in touch</h2>
+					<form method="post" action="#">
+						<div class="field half first">
+							<input type="text" name="name" id="name" placeholder="Name" />
+						</div>
+						<div class="field half">
+							<input type="email" name="email" id="email" placeholder="Email" />
+						</div>
+						<div class="field">
+							<textarea name="message" id="message" placeholder="Message"></textarea>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Send" class="special" /></li>
+						</ul>
+					</form>
+				</section>
+				<section>
+					<h2>Follow</h2>
+					<ul class="icons">
+						<li><a href="#" class="icon style2 fa-facebook"><span
+								class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon style2 fa-instagram"><span
+								class="label">Instagram</span></a></li>
+						<li><a href="#" class="icon style2 fa-phone"><span
+								class="label">Phone</span></a></li>
+						<li><a href="#" class="icon style2 fa-envelope-o"><span
+								class="label">Email</span></a></li>
+					</ul>
+				</section>
+				<ul class="copyright">
+					<li>&copy; All rights reserved</li>
+					<li>Design by Jo</li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="static/assets/js/jquery.min.js"></script>
+	<script src="static/assets/js/skel.min.js"></script>
+	<script src="static/assets/js/util.js"></script>
+	<script src="static/assets/js/main.js"></script>
+	<script src="static/controllers/logout/logout.js"></script>
+	<script src="static/controllers/manager/managerCCategories.js"></script>
+</body>
+</html>
