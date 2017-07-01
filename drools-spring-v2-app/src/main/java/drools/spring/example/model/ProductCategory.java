@@ -28,6 +28,9 @@ public class ProductCategory implements Serializable {
 	@Column(name = "maxDiscount", unique = false, nullable = false)
 	private int maxDiscount;
 	
+	@Column(name = "consumerGoods", unique = false, nullable = true)
+	private boolean consumerGoods;
+	
 	@ManyToOne
 	@JoinColumn(name="parentCategory", referencedColumnName = "product_category_id", nullable = true)
 	private ProductCategory parentCategory;
@@ -66,4 +69,18 @@ public class ProductCategory implements Serializable {
 		this.parentCategory = parentCategory;
 	}
 
+	public boolean isConsumerGoods() {
+		return consumerGoods;
+	}
+
+	public void setConsumerGoods(boolean consumerGoods) {
+		this.consumerGoods = consumerGoods;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductCategory [id=" + id + ", name=" + name + ", maxDiscount=" + maxDiscount + ", consumerGoods="
+				+ consumerGoods + ", parentCategory=" + parentCategory + "]";
+	}
+	
 }

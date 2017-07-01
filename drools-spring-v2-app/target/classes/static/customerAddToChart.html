@@ -8,7 +8,6 @@
 <body onLoad="loadProduct()">
 	<!-- Wrapper -->
 	<div id="wrapper">
-
 		<!-- Header -->
 		<header id="header">
 			<div class="inner">
@@ -32,7 +31,7 @@
 						Home</a></li>
 				<li><a href="customerProfile.html" class="icon fa-user">&nbsp;
 						My profile</a></li>
-				<li><a href="generic.html" class="icon fa-shopping-cart">&nbsp;
+				<li><a href="customerCart.html" class="icon fa-shopping-cart">&nbsp;
 						Shopping cart</a></li>
 				<li><a href="generic.html" class="icon fa-bars">&nbsp; My
 						orders</a></li>
@@ -45,9 +44,9 @@
 		<div id="main">
 			<div style="width: 85%; margin: 0 auto;">
 				<header>
-					<h1>Add to chart</h1>
+					<h1>Add to cart</h1>
 				</header>
-				
+
 				<!-- CONTENT -->
 				<section>
 					<form>
@@ -56,34 +55,40 @@
 								<b>ID</b> <input type="text" placeholder="Id" id="id" disabled />
 							</div>
 							<div class="6u$">
-								<b>Name</b> <input type="text" placeholder="Name" id="name" disabled />
+								<b>Name</b> <input type="text" placeholder="Name" id="name"
+									disabled />
 							</div>
 							<div class="6u$">
-								<b>Category</b> <input type="text" placeholder="Category" id="category" disabled />
+								<b>Category</b> <input type="text" placeholder="Category"
+									id="category" disabled />
 							</div>
 							<div class="6u$">
-								<b>Price</b> <input type="text" placeholder="Price" id="price" disabled />
+								<b>Price</b> <input type="text" placeholder="Price" id="price"
+									disabled />
 							</div>
 							<div class="6u$">
 								<b>Stock</b> <input type="text" id="stock" disabled />
 							</div>
 							<div class="6u$">
-								<b>Quantity</b> <input type="text" placeholder="Quantity" id="quantity" onfocusout="showTotalPrice()" />
+								<b>Quantity</b> <input type="text" placeholder="Quantity"
+									id="quantity" onfocusout="showTotalPrice()" />
 							</div>
-							</div>
-							<div class="12u$">
-								<br>
-								<h5 id="totalPrice" style="display: none;">Total price: <span id="total"></span></h5>
-								<h5 id="error" style="display: none;">You chose too many products!</h5>
-								<ul class="actions">
-									<li><a class="special button" onClick="addToCart()">Add to cart</a></li>
-									<li><a href="customer.html" class="button">Cancel</a></li>
-								</ul>
-							</div>
+						</div>
+						<div class="12u$">
+							<br>
+							<h5 id="totalPrice" style="display: none;">
+								Total price: <span id="total"></span>
+							</h5>
+							<h5 id="error" style="display: none;">You chose too many
+								products!</h5>
+							<ul class="actions">
+								<li><a class="special button" onClick="addToCart()">Add
+										to cart</a></li>
+								<li><a href="customer.html" class="button">Cancel</a></li>
+							</ul>
 						</div>
 					</form>
 				</section>
-				
 			</div>
 		</div>
 

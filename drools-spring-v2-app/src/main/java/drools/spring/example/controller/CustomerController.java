@@ -2,6 +2,8 @@ package drools.spring.example.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +58,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value="/login", method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<UserLiteDTO> login(@RequestBody UserDTO dto){
+	public ResponseEntity<UserLiteDTO> login(@RequestBody UserDTO dto, HttpSession session){
 		User user = userService.findByUsername(dto.getUsername());
 		if (user == null){
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -67,6 +69,7 @@ public class CustomerController {
 		UserLiteDTO retVal = new UserLiteDTO();
 		retVal.setUsername(user.getUsername());
 		retVal.setRole(user.getRole());
+		session.setAttribute("user", user.getUsername());
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 

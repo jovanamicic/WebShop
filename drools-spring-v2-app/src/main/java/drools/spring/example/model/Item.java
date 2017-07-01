@@ -133,6 +133,13 @@ public class Item implements Serializable{
 	public void setDiscountsItems(Set<DiscountItem> discountsItems) {
 		this.discountsItems = discountsItems;
 	}
+
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", bill=" + bill + ", num=" + num + ", product=" + product + ", unitPrice="
+				+ unitPrice + ", quantity=" + quantity + ", originalPrice=" + originalPrice + ", discount=" + discount
+				+ ", finalPrice=" + finalPrice + ", discountsItems=" + discountsItems + "]";
+	}
 	
 	
 	

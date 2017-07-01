@@ -6,12 +6,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "bill")
 public class Bill implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -24,25 +29,26 @@ public class Bill implements Serializable{
 	@Column(name = "date", unique = false, nullable = false)
 	private Date date;
 	
-	@JoinColumn(name = "customer", referencedColumnName = "customer_id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "customer", referencedColumnName = "username", nullable = false)
 	private Customer customer;
 	
 	@Column(name = "state", unique = false, nullable = false)
 	private String state;
 	
-	@Column(name = "original_total_price", unique = false, nullable = false)
+	@Column(name = "original_total_price", unique = false, nullable = true)
 	private double originalTotalPrice;
 	
-	@Column(name = "final_price", unique = false, nullable = false)
+	@Column(name = "final_price", unique = false, nullable = true)
 	private double finalPrice;
 	
-	@Column(name = "discount", unique = false, nullable = false)
+	@Column(name = "discount", unique = false, nullable = true)
 	private int discount;
 	
-	@Column(name = "coupons_spent", unique = false, nullable = false)
+	@Column(name = "coupons_spent", unique = false, nullable = true)
 	private double couponsSpent;
 
-	@Column(name = "coupons_gained", unique = false, nullable = false)
+	@Column(name = "coupons_gained", unique = false, nullable = true)
 	private double couponsGained;
 	
 	@OneToMany(mappedBy="bill")
@@ -138,9 +144,13 @@ public class Bill implements Serializable{
 	public void setItems(Set<Item> items) {
 		this.items = items;
 	}
-	
-	
-	
-	
 
+	@Override
+	public String toString() {
+		return "Bill [id=" + id + ", date=" + date + ", customer=" + customer + ", state=" + state
+				+ ", originalTotalPrice=" + originalTotalPrice + ", finalPrice=" + finalPrice + ", discount=" + discount
+				+ ", couponsSpent=" + couponsSpent + ", couponsGained=" + couponsGained + ", discountsBill="
+				+ discountsBill + ", items=" + items + "]";
+	}
+	
 }

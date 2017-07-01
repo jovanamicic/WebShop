@@ -80,7 +80,7 @@ public class DiscountItem implements Serializable {
 
 	@Override
 	public String toString() {
-		return "DiscountItem [id=" + id + ", bill=" + bill + ", item=" + item + ", discount=" + discount + ", isBasic="
+		return "DiscountItem [id=" + id + ", bill=" + bill.getId() + ", item=" + item.getProduct().getName() + ", discount=" + discount + ", isBasic="
 				+ isBasic + "]";
 	}
 
