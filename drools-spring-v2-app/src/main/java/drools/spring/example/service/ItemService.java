@@ -3,6 +3,7 @@ package drools.spring.example.service;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.kie.api.runtime.KieContainer;
@@ -11,10 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import drools.spring.example.model.Action;
+import drools.spring.example.model.DiscountItem;
 import drools.spring.example.model.Item;
+import drools.spring.example.model.ProductCategory;
 import drools.spring.example.repository.ActionRepository;
 import drools.spring.example.repository.BillRepository;
+import drools.spring.example.repository.DiscountItemRepository;
 import drools.spring.example.repository.ItemRepository;
+import drools.spring.example.repository.ProductCategoryRepository;
 
 @Service
 public class ItemService {
@@ -27,6 +32,12 @@ public class ItemService {
 	
 	@Autowired
 	private ActionRepository actionRepository;
+	
+	@Autowired
+	private ProductCategoryRepository productCategoryRepository;
+	
+	@Autowired
+	private DiscountItemRepository discountItemRepository;
 	
 	private final KieContainer kieContainer;
 	   
@@ -56,6 +67,48 @@ public class ItemService {
 		kieSession.setGlobal("actions", actions);
 		kieSession.fireAllRules();
 		kieSession.dispose(); 
+		
+		item = findMaxBasicDiscount(item);
+		item = setTotalDiscount(item);
+		return item;
+	}
+	
+	public void saveAllDiscountItems(Item item) {
+		for (DiscountItem di : item.getDiscountsItems()) {
+			discountItemRepository.save(di);
+		}
+	}
+
+	public Item setTotalDiscount(Item item){
+		int discount = 0;
+		for (DiscountItem di : item.getDiscountsItems()) {
+			discount = discount + di.getDiscount();
+		}
+		
+		ProductCategory pc = productCategoryRepository.findById(item.getProduct().getProductCategory().getId());
+		if (discount > pc.getMaxDiscount())
+			discount = pc.getMaxDiscount();
+		
+		item.setDiscount(discount);
+		return item;
+	}
+	
+	public Item findMaxBasicDiscount(Item item) {
+		int maxDiscount = -1;
+
+		for (DiscountItem discount : item.getDiscountsItems()) {
+			if (discount.isBasic() && discount.getDiscount() >= maxDiscount) {
+				maxDiscount = discount.getDiscount();
+			}
+		}
+
+		for (Iterator<DiscountItem> iter = item.getDiscountsItems().iterator(); iter.hasNext();) {
+			DiscountItem a = iter.next();
+			if (a.isBasic() && a.getDiscount() < maxDiscount) {
+				iter.remove();
+			}
+		}
+		
 		return item;
 	}
 	

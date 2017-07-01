@@ -64,10 +64,10 @@ public class BillController {
 			item.setQuantity(i.getQuantity());
 			item.setOriginalPrice(i.getPrice() * i.getQuantity());
 			item = itemService.getDiscount(item);
-			//double finalPrice = item.getOriginalPrice() * (1 - (item.getDiscount() / 100));
-			item.setFinalPrice(0.0); 
+			double finalPrice = item.getOriginalPrice() * (1 - ((double) item.getDiscount() / 100));
+			item.setFinalPrice(finalPrice); 
 			item = itemService.save(item);
-			System.out.println(item.getDiscountsItems());
+			itemService.saveAllDiscountItems(item);
 			items.add(item);
 		}
 		/*
