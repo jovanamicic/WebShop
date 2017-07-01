@@ -1,8 +1,5 @@
 package drools.spring.example.service;
 
-import java.util.List;
-import java.util.Set;
-
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +7,17 @@ import org.springframework.stereotype.Service;
 
 import drools.spring.example.model.Bill;
 import drools.spring.example.model.DiscountBill;
-import drools.spring.example.model.Limit;
 import drools.spring.example.repository.BillRepository;
+import drools.spring.example.repository.DiscountBillRepository;
 
 @Service
 public class BillService {
 	
 	@Autowired
 	private BillRepository repo;
+	
+	@Autowired
+	private DiscountBillRepository discountBillRepository;
 	
 	private final KieContainer kieContainer;
 	   
@@ -36,6 +36,10 @@ public class BillService {
 		kieSession.getAgenda().getAgendaGroup("discountBill").setFocus();
 		kieSession.fireAllRules();
 		kieSession.dispose(); 
+		
+		for (DiscountBill db : b.getDiscountsBill()) {
+			discountBillRepository.save(db);
+		}
 		
 		b = setTotalDiscount(b);
 		
@@ -60,4 +64,9 @@ public class BillService {
 		kieSession.dispose(); 
 		return b;
 	}
+
+	public Bill findOne(int id) {
+		return repo.findOne(id);
+	}
+
 }

@@ -45,29 +45,34 @@
 		<div id="main">
 			<div style="width: 85%; margin: 0 auto;">
 				<header>
-					<h1 style="align:center">Shopping cart</h1>
+					<h1 style="align: center">Shopping cart</h1>
 				</header>
-				
+
 				<!-- CONTENT -->
-				<section>
-					<h3 id="noItems" style="display:none">Sorry, no items in cart.</h3>
-					<div class="table-wrapper">
-					<table id="table" style="display:none">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Name</th>
-								<th>Quantity</th>
-								<th>Price</th>
-								<th>Total</th>
-							</tr>
-						</thead>
-						<tbody id="tableBody">
-						</tbody>
-					</table>
-					</div>
-				</section>
-				<a class="button special" onClick="checkOut()">Check out</a>
+					<section>
+						<h3 id="noItems" style="display: none">Sorry, no items in
+							cart.</h3>
+						<div class="table-wrapper">
+							<table id="table" style="display: none">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Name</th>
+										<th>Quantity</th>
+										<th>Price</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody id="tableBody">
+								</tbody>
+							</table>
+						</div>
+					</section>
+					
+					<a id="step1" class="button special" onClick="checkOut()">Check out</a>
+				
+				<div id="step2" style="display:none">
+				</div>
 			</div>
 		</div>
 

@@ -112,6 +112,7 @@ function loadCart() {
 	}
 }
 
+var billID = -1;
 function checkOut(){
 	cart = JSON.parse(sessionStorage.getItem('cart'));
 	$.ajax({
@@ -120,8 +121,31 @@ function checkOut(){
 		url : "/bills/",
 		data: JSON.stringify(cart),
 		success : function(data) {
-			console.log("OK");
+			console.log(data);
+			billID = data.id;
+			document.getElementById("step1").style.display = "none";
+			document.getElementById("step2").innerHTML = "Total amount is <b>"+data.finalPrice+"</b> EUR. <br/><p></p><input type=\"checkbox\" id=\"usePoints\" name=\"usePoints\"><label for=\"usePoints\">Use my points</label></br><a class=\"button special\" onClick=\"finish()\">Finish</a>";
+			document.getElementById("step2").style.display = "block";
 		},
+		error : function(e) {
+			console.log("error");
+		}
+	});
+}
+
+function finish(){
+	var usePoints = document.getElementById("usePoints").checked;
+	var bill = {
+			id : billID
+	}
+	$.ajax({
+		type : "POST",
+		contentType : "application/json",
+		url : "/bills/points/"+ usePoints,
+		data : JSON.stringify(bill),
+		success : function(data) {
+				window.location.href = "/bill.html?id=" + billID;
+			},
 		error : function(e) {
 			console.log("error");
 		}

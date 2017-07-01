@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="static/assets/css/main.css" />
 </head>
-<body onLoad="loadCart()">
+<body onLoad="loadBill()">
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -45,34 +45,44 @@
 		<div id="main">
 			<div style="width: 85%; margin: 0 auto;">
 				<header>
-					<h1 style="align: center">Shopping cart</h1>
+					<h1 style="align: center">Bill info</h1>
 				</header>
 
 				<!-- CONTENT -->
-					<section>
-						<h3 id="noItems" style="display: none">Sorry, no items in
-							cart.</h3>
-						<div class="table-wrapper">
-							<table id="table" style="display: none">
-								<thead>
-									<tr>
-										<th>ID</th>
-										<th>Name</th>
-										<th>Quantity</th>
-										<th>Price</th>
-										<th>Total</th>
-									</tr>
-								</thead>
-								<tbody id="tableBody">
-								</tbody>
-							</table>
+				<section>
+					<div class="row uniform" id="inner">
+						<div class="6u$">
+							<b>Original price</b> <input type="text" placeholder="Original price" id="originalPrice" disabled />
 						</div>
-					</section>
-					
-					<a id="step1" class="button special" onClick="checkOut()">Check out</a>
-				
-				<div id="step2" style="display:none">
-				</div>
+						<div class="6u$">
+							<b>Discount</b> <input type="text" placeholder="Discount" id="discount" disabled />
+						</div>
+						<div class="6u$">
+							<b>Final price</b> <input type="text" placeholder="Final price" id="finalPrice" disabled />
+						</div>
+						<div class="6u$">
+							<b>Spent points</b> <input type="text" placeholder="Spent points" id="spentPoints" disabled />
+						</div>
+						<div class="6u$">
+							<b>Gained points</b> <input type="text" placeholder="Gained points" id="gainedPoints" disabled />
+						</div>
+						
+						<div class="6u$">
+							<h3>Items discounts</h3>
+							<ul id="itemsD">
+								
+							</ul>
+						</div>
+						
+						<div class="6u$">
+							<h3>Bill discounts</h3>
+							<ul id="billD">
+								
+							</ul>
+						</div>
+						
+					</div>
+				</section>
 			</div>
 		</div>
 
@@ -124,6 +134,6 @@
 	<script src="static/assets/js/util.js"></script>
 	<script src="static/assets/js/main.js"></script>
 	<script src="static/controllers/logout/logout.js"></script>
-	<script src="static/controllers/customer/customerShoppingCart.js"></script>
+	<script src="static/controllers/customer/bill.js"></script>
 </body>
 </html>
