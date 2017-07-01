@@ -1,0 +1,12 @@
+package drools.spring.rules
+
+import drools.spring.example.model.Product;
+
+//Ako je brojno stanje artikla manje od minimalnog, postavi naznaku u artiklu.
+rule "Rule n)"
+	agenda-group "products"
+    when
+        $p: Product(stock < minimumInStock)
+    then
+    	$p.setRefill(true);
+end

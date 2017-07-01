@@ -7,6 +7,7 @@ public class ProductDTO {
 	private ProductCategoryDTO category;
 	private int stock;
 	private double price;
+	private int minimumInStock;
 	
 	public ProductDTO(){}
 
@@ -59,4 +60,12 @@ public class ProductDTO {
 		this.price = price;
 	}
 
+	public int getMinimumInStock() {
+		return minimumInStock;
+	}
+
+	public void setMinimumInStock(int minimumInStock) {
+		this.minimumInStock = minimumInStock;
+	}
+	
 }

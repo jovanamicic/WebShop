@@ -53,4 +53,27 @@ public class ProductService {
 		return p;
 	}
 
+	public List<Product> findProductsForRefill() {
+		List<Product> products = repo.findAll();
+		for (Product product : products) {
+			KieSession kieSession = kieContainer.newKieSession();
+			kieSession.insert(product);
+			kieSession.getAgenda().getAgendaGroup("products").setFocus();
+			kieSession.fireAllRules();
+			kieSession.dispose(); 
+			if (product.isRefill())
+				repo.save(product);
+		}
+		return products;
+	}
+
+	public List<Product> findByRefill(boolean b) {
+		return repo.findByRefill(b);
+	}
+
+	public Product save(Product product) {
+		return repo.save(product);
+		
+	}
+
 }

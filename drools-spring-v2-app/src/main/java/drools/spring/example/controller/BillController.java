@@ -122,6 +122,7 @@ public class BillController {
 		// gained points
 		c.setPoints((int) (c.getPoints() + bill.getCouponsGained()));
 		customerService.save(c);
+		bill.setState("ordered");
 		billService.save(bill);
 
 		return new ResponseEntity<>(HttpStatus.OK);
