@@ -55,6 +55,8 @@ public class BillController {
 		
 		ArrayList<Item> items = new ArrayList<Item>();
 		int num = 0;
+		double originalPriceBill = 0; 
+		double finalPriceSum = 0;
 		for (ItemDTO i : dto) {
 			Item item = new Item();
 			item.setBill(b);
@@ -69,17 +71,22 @@ public class BillController {
 			item = itemService.save(item);
 			itemService.saveAllDiscountItems(item);
 			items.add(item);
+			originalPriceBill = originalPriceBill + (item.getOriginalPrice());
+			finalPriceSum = finalPriceSum + item.getFinalPrice();
 		}
-		/*
-		b.setOriginalTotalPrice(originalPrice);
-		b.setFinalPrice(finalPrice);
-		b.setDiscount(discount);
-		b.setCouponsGained(couponsGained);
-		b.setCouponsSpent(couponsSpent);
-		b.setDiscountsBill(discountsBill);*/
 		
 		Set<Item> itemsSet = new HashSet<Item>(items);
 		b.setItems(itemsSet);
+		
+		b.setOriginalTotalPrice(originalPriceBill);
+		b = billService.getDiscount(b);
+		double finalPrice = finalPriceSum * (1 - ((double) b.getDiscount() / 100));
+		b.setFinalPrice(finalPrice);
+		b = billService.getCoupons(b);
+		billService.save(b);
+		
+		customer.setPoints(customer.getPoints() + (int) b.getCouponsGained());
+		customerService.save(customer);
 		
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}

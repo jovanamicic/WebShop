@@ -1,0 +1,22 @@
+package drools.spring.rules
+
+import drools.spring.example.model.Bill;
+import drools.spring.example.model.Limit;
+
+import java.util.Set;
+
+// Na osnovu konačne cene računa i kategorija kupca identifikuj prag potrošnje kupca.
+// Iz identifikovanog praga preuzmi procentualnu vrednost i primeni je na plaćenu cenu računa.
+// Dobijeni broj zaokruži i upiši kao nove akcijske bodove u računu.
+rule "Rule m)"
+	agenda-group "couponsBill"
+    when
+    	$b : Bill( $list : customer.ccategory.limits, $finalPrice : finalPrice)
+    	$limits : Set ( )
+    		from collect ( Limit ( $finalPrice > minimum , $finalPrice < maximum ) from $list )
+    	
+    then
+    	Limit l = (Limit) $limits.iterator().next();
+    	int couponsGained = (int) Math.round( $finalPrice * ((double) l.getDiscount() / 100));
+		$b.setCouponsGained(couponsGained);
+end

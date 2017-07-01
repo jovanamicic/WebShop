@@ -1,4 +1,5 @@
 package drools.spring.rules
+
 import drools.spring.example.model.Item;
 import drools.spring.example.model.Bill;
 import drools.spring.example.model.DiscountItem;
