@@ -12,6 +12,8 @@ public class BillDTO {
 	private int gainedPoints;
 	private List<DiscountItemDTO> discountItems;
 	private List<DiscountBillDTO> discountBill;
+	private String status;
+	private String date;
 	
 	public BillDTO(){}
 
@@ -78,5 +80,20 @@ public class BillDTO {
 	public void setDiscountBill(List<DiscountBillDTO> discountBill) {
 		this.discountBill = discountBill;
 	}
-	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
 }

@@ -1,5 +1,6 @@
 package drools.spring.example.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -26,6 +27,7 @@ import drools.spring.example.model.Customer;
 import drools.spring.example.model.DiscountBill;
 import drools.spring.example.model.DiscountItem;
 import drools.spring.example.model.Item;
+import drools.spring.example.model.Product;
 import drools.spring.example.service.BillService;
 import drools.spring.example.service.CustomerService;
 import drools.spring.example.service.ItemService;
@@ -46,6 +48,8 @@ public class BillController {
 
 	@Autowired
 	private BillService billService;
+	
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
 	public ResponseEntity<BillDTO> addNew(@RequestBody List<ItemDTO> dto, HttpSession session) {
@@ -167,17 +171,72 @@ public class BillController {
 			dto.setOriginalPrice(b.getOriginalTotalPrice());
 			dto.setFinalPrice(b.getFinalPrice());
 			dto.setDiscount(b.getDiscount());
+			dto.setStatus(b.getState());
+			String date = sdf.format(b.getDate());
+			dto.setDate(date);
 			retVal.add(dto);
 		}
 		return new ResponseEntity<>(retVal, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value="/cancel/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> getStatusBills(@PathVariable int id) {
+	public ResponseEntity<Void> cancelBill(@PathVariable int id) {
 		Bill b = billService.findOne(id);
 		b.setState("cancelled");
 		billService.save(b);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@RequestMapping(value="/accept/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> acceptBill(@PathVariable int id) {
+		Bill b = billService.findOne(id);
+		Set<Item> items = b.getItems();
+		ArrayList<Boolean> list = new ArrayList<Boolean>();
+		for (Item item : items) {
+			Product p = productService.findOneById(item.getProduct().getId());
+			if (p.getStock() > item.getQuantity()){
+				list.add(true);
+			}
+			else{
+				list.add(false);
+			}
+		}
+		if (list.contains(false)){
+			b.setState("cancelled");
+		}
+		else{
+			for (Item item : items) {
+				Product p = productService.findOneById(item.getProduct().getId());
+				p.setStock(p.getStock() - item.getQuantity());
+				productService.save(p);
+			}
+			
+			b.setState("finished");
+			Customer c = customerService.findByUsername(b.getCustomer().getUsername());
+			c.setPoints((int) (c.getPoints() +  b.getCouponsGained()));
+			customerService.save(c);
+		}
+		
+		billService.save(b);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/customer/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<BillDTO>> getCustomerBills(@PathVariable String id) {
+		List<Bill> bills = billService.findByCustomer(id);
+		List<BillDTO> retVal = new ArrayList<BillDTO>();
+		
+		for (Bill b : bills) {
+			BillDTO dto = new BillDTO();
+			dto.setId(b.getId());
+			dto.setOriginalPrice(b.getOriginalTotalPrice());
+			dto.setFinalPrice(b.getFinalPrice());
+			dto.setDiscount(b.getDiscount());
+			dto.setStatus(b.getState());
+			String date = sdf.format(b.getDate());
+			dto.setDate(date);
+			retVal.add(dto);
+		}
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
 }

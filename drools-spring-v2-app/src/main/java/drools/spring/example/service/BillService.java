@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import drools.spring.example.model.Bill;
+import drools.spring.example.model.Customer;
 import drools.spring.example.model.DiscountBill;
 import drools.spring.example.repository.BillRepository;
 import drools.spring.example.repository.DiscountBillRepository;
@@ -73,6 +74,10 @@ public class BillService {
 
 	public List<Bill> findByState(String status) {
 		return repo.findByState(status);
+	}
+
+	public List<Bill> findByCustomer(String c) {
+		return repo.findByCustomerUsername(c);
 	}
 
 }

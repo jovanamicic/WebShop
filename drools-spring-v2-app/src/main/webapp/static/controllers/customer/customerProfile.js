@@ -5,7 +5,6 @@ function getCustomer() {
 		contentType : "application/json",
 		url : "/customers/" + username,
 		success : function(data) {
-			console.log(data);
 			document.getElementById("nameSurname").innerHTML = data.name + " " + data.surname;
 			document.getElementById("username").innerHTML = data.username;
 			document.getElementById("points").innerHTML = data.points;

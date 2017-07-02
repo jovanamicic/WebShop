@@ -101,7 +101,7 @@ function fillTable(data, table) {
 
 function loadCart() {
 	cart = JSON.parse(sessionStorage.getItem('cart'));
-	if (!cart) {
+	if (!cart || cart.length == 0) {
 		document.getElementById("noItems").style.display = "block";
 		document.getElementById("table").style.display = "none";
 	} else {
@@ -144,6 +144,7 @@ function finish(){
 		url : "/bills/points/"+ usePoints,
 		data : JSON.stringify(bill),
 		success : function(data) {
+				sessionStorage.setItem('cart', JSON.stringify([]));
 				window.location.href = "/bill.html?id=" + billID;
 			},
 		error : function(e) {

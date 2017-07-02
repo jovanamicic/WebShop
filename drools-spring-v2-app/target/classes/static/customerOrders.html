@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="static/assets/css/main.css" />
 </head>
-<body onLoad="showOBills()">
+<body onLoad="loadBills()">
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -28,12 +28,14 @@
 		<nav id="menu">
 			<h2>Menu</h2>
 			<ul>
-				<li><a href="seller.html" class="icon fa-home"> &nbsp;
+				<li><a href="customer.html" class="icon fa-home"> &nbsp;
 						Home</a></li>
-				<li><a href="sellerProducts.html" class="icon fa-shopping-cart">&nbsp;
-						Products</a></li>
-				<li><a href="sellerBills.html" class="icon fa-bars">&nbsp;
-						Bills</a></li>
+				<li><a href="customerProfile.html" class="icon fa-user">&nbsp;
+						My profile</a></li>
+				<li><a href="customerCart.html" class="icon fa-shopping-cart">&nbsp;
+						Shopping cart</a></li>
+				<li><a href="customerOrders.html" class="icon fa-bars">&nbsp;
+						My orders</a></li>
 				<li><a onClick="logout()" class="icon fa-sign-out">&nbsp;
 						Logout</a></li>
 			</ul>
@@ -43,24 +45,8 @@
 		<div id="main">
 			<div class="inner">
 				<header>
-					<h1>Manage bills</h1>
+					<h1>Your orders</h1>
 				</header>
-
-				<!-- CONTENT -->
-				<section>
-					<div class="row uniform">
-						<div class="4u 12u$(xsmall)">
-							<a id="oBtn" class="button fit special" onClick="showOBills()">&nbsp; Ordered</a>
-						</div>
-						<div class="4u 12u$(xsmall)">
-							<a id="fBtn" class="button fit" onClick="showFBills()">&nbsp; Finished</a>
-						</div>
-						<div class="4u 12u$(xsmall)">
-							<a id="cBtn" class=" fit button" onClick="showCBills()">&nbsp; Cancelled</a>
-						</div>
-					</div>
-				</section>
-				<p></p>
 				<section>
 					<div class="table-wrapper">
 						<table id="billsTable">
@@ -72,8 +58,7 @@
 									<th>Final price</th>
 									<th>Discount</th>
 									<th>Status</th>
-									<th>Accept</th>
-									<th>Cancel</th>
+									<th>Info</th>
 								</tr>
 							</thead>
 							<tbody id="tableData">
@@ -83,6 +68,7 @@
 				</section>
 			</div>
 		</div>
+
 
 		<!-- Footer -->
 		<footer id="footer">
@@ -131,7 +117,7 @@
 	<script src="static/assets/js/skel.min.js"></script>
 	<script src="static/assets/js/util.js"></script>
 	<script src="static/assets/js/main.js"></script>
-	<script src="static/controllers/seller/bills.js"></script>
 	<script src="static/controllers/logout/logout.js"></script>
+	<script src="static/controllers/customer/customerOrders.js"></script>
 </body>
 </html>

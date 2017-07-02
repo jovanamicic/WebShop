@@ -11,7 +11,7 @@ INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `
 
 -- LIMIT
 INSERT INTO `webshop`.`limit_range` (`limit_id`, `discount`, `maximum`, `minimum`) VALUES ('1', '10', '5000', '1000');
-INSERT INTO `webshop`.`limit_range` (`discount`, `maximum`, `minimum`) VALUES ('20', '5001', '10000');
+INSERT INTO `webshop`.`limit_range` (`discount`, `maximum`, `minimum`) VALUES ('20', '10000', '5001');
 INSERT INTO `webshop`.`limit_range` (`discount`, `maximum`, `minimum`) VALUES ('25', '1000000', '100000');
 
 -- CATEGORY LIMIT
