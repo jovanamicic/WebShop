@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="static/assets/css/main.css" />
 </head>
-<body>
+<body onLoad="showOBills()">
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -50,14 +50,33 @@
 				<section>
 					<div class="row uniform">
 						<div class="4u 12u$(xsmall)">
-							<a href="sellerProducts.html" class="icon button  fa-shopping-cart">&nbsp;
-							Manage products</a>
+							<a id="oBtn" class="button fit special" onClick="showOBills()">&nbsp; Ordered</a>
 						</div>
 						<div class="4u 12u$(xsmall)">
-							<a href="sellerBills.html"
-								class="icon button  fa-bars">&nbsp; Manage bills
-								</a>
+							<a id="fBtn" class="button fit" onClick="showFBills()">&nbsp; Finished</a>
 						</div>
+						<div class="4u 12u$(xsmall)">
+							<a id="cBtn" class=" fit button" onClick="showCBills()">&nbsp; Cancelled</a>
+						</div>
+					</div>
+				</section>
+				<p></p>
+				<section>
+					<div class="table-wrapper">
+						<table id="billsTable">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Original price</th>
+									<th>Final price</th>
+									<th>Discount</th>
+									<th>Accept</th>
+									<th>Cancel</th>
+								</tr>
+							</thead>
+							<tbody id="tableData">
+							</tbody>
+						</table>
 					</div>
 				</section>
 			</div>
@@ -110,6 +129,6 @@
 	<script src="static/assets/js/skel.min.js"></script>
 	<script src="static/assets/js/util.js"></script>
 	<script src="static/assets/js/main.js"></script>
-	<script src="static/controllers/logout/logout.js"></script>
+	<script src="static/controllers/seller/bills.js"></script>
 </body>
 </html>

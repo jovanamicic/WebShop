@@ -1,5 +1,7 @@
 package drools.spring.example.service;
 
+import java.util.List;
+
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,6 +69,10 @@ public class BillService {
 
 	public Bill findOne(int id) {
 		return repo.findOne(id);
+	}
+
+	public List<Bill> findByState(String status) {
+		return repo.findByState(status);
 	}
 
 }

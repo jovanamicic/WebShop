@@ -119,9 +119,6 @@ public class BillController {
 			bill.setCouponsSpent(0.0);
 		}
 
-		// gained points
-		c.setPoints((int) (c.getPoints() + bill.getCouponsGained()));
-		customerService.save(c);
 		bill.setState("ordered");
 		billService.save(bill);
 
@@ -158,6 +155,29 @@ public class BillController {
 		bill.setDiscountBill(discountBill);
 
 		return new ResponseEntity<>(bill, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/status/{status}", method = RequestMethod.GET)
+	public ResponseEntity<List<BillDTO>> getStatusBills(@PathVariable String status) {
+		List<Bill> bills = billService.findByState(status); 
+		List<BillDTO> retVal = new ArrayList<BillDTO>();
+		for (Bill b : bills) {
+			BillDTO dto = new BillDTO();
+			dto.setId(b.getId());
+			dto.setOriginalPrice(b.getOriginalTotalPrice());
+			dto.setFinalPrice(b.getFinalPrice());
+			dto.setDiscount(b.getDiscount());
+			retVal.add(dto);
+		}
+		return new ResponseEntity<>(retVal, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/cancel/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> getStatusBills(@PathVariable int id) {
+		Bill b = billService.findOne(id);
+		b.setState("cancelled");
+		billService.save(b);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
