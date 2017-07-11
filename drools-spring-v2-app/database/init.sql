@@ -12,7 +12,7 @@ INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `
 -- LIMIT
 INSERT INTO `webshop`.`limit_range` (`limit_id`, `discount`, `maximum`, `minimum`) VALUES ('1', '10', '5000', '1000');
 INSERT INTO `webshop`.`limit_range` (`discount`, `maximum`, `minimum`) VALUES ('20', '10000', '5001');
-INSERT INTO `webshop`.`limit_range` (`discount`, `maximum`, `minimum`) VALUES ('25', '1000000', '100000');
+INSERT INTO `webshop`.`limit_range` (`discount`, `maximum`, `minimum`) VALUES ('25', '1000000', '10001');
 
 -- CATEGORY LIMIT
 INSERT INTO `webshop`.`category_limit` (`ccategory_id`, `limit_id`) VALUES ('1', '1');

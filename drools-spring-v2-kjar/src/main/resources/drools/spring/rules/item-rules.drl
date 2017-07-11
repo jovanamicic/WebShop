@@ -25,6 +25,7 @@ rule "Rule a)"
     	discount.setBasic(true);
     	discount.setDiscount(10);
     	$i.getDiscountsItems().add(discount);
+    	System.out.println("Discount a)");
 end
 
 //Kreiraj osnovni popust od 5% za stavku ukoliko se u njoj naručuje više od 5 artikla,
@@ -40,6 +41,7 @@ rule "Rule b)"
     	discount.setBasic(true);
     	discount.setDiscount(5);
     	$i.getDiscountsItems().add(discount);
+    	System.out.println("Discount b)");
 end
 
 //Kreiraj osnovni popust od 7% za stavku ukoliko ukupna naručena vrednost stavke prelazi
@@ -55,6 +57,7 @@ rule "Rule c)"
     	discount.setBasic(true);
     	discount.setDiscount(7);
     	$i.getDiscountsItems().add(discount);
+    	System.out.println("Discount c)");
 end
 
 //Kreiraj dodatni popust od 2% za stavku ukoliko je artikal iz stavke već kupovan u prethodnih 15 dana.
@@ -76,6 +79,7 @@ rule "Rule d)"
     	discount.setBasic(false);
     	discount.setDiscount(2);
     	$i.getDiscountsItems().add(discount);
+    	System.out.println("Discount d)");
 end
 
 //Kreiraj dodatni popust od 1% za stavku ukoliko su proizvodi iz kategorije tog artikla kupovani u prethodnih 30 dana.
@@ -97,6 +101,7 @@ rule "Rule e)"
     	discount.setBasic(false);
     	discount.setDiscount(1);
     	$i.getDiscountsItems().add(discount);
+    	System.out.println("Discount e)");
 end
 
 //Ukoliko datum narudžbenice pripada nekom vremenskom periodu akcijskog događaja i ukoliko za artikal iz stavke njegova
@@ -107,7 +112,7 @@ rule "Rule f)"
     when
 	$i: Item()
 	  Boolean( booleanValue ) 
-	     from accumulate( Action( $cat: categories) from actions,
+	     from accumulate( Action( $cat: categories )  from actions,
 	     init( boolean hasDiscount = false),
 	     action( for( Object obj: $cat )
 	               if( $i.getProduct().getProductCategory().getId() == (((ProductCategory)obj).getId())) hasDiscount = true;
@@ -118,6 +123,33 @@ rule "Rule f)"
     	discount.setBill($i.getBill());
     	discount.setItem($i);
     	discount.setBasic(false);
-    	discount.setDiscount(5);
-    	$i.getDiscountsItems().add(discount);    	
+    	discount.setDiscount(1);
+    	$i.getDiscountsItems().add(discount);  
+    	System.out.println("Discount f)");  	
+end
+
+//1.	Za stavku računa saberi sve popuste (osnovni + svi dodatni) koji su za nju definisani.
+//2.	Potom na osnovu kategorije artikla iz stavke uporedi rezultat sabiranja popusta (izražen u procentima) 
+//	    sa maksimalno dozvoljenim popustom (izražen u procentima) koje se primenjuje za artikle iz posmatrane kategorije. 
+//3.	Ukoliko vrednost ne prelazi maksimalnu dozvoljeni popust, tada se rezultat upisuje u polje procenat umanjenja za stavku. 
+//  	U suprotnom se upisuje maksimalno dozvoljeni popust za artikle koji pripadaju ovoj kategoriji.
+//4.	Na osnovu procenata umanjenja stavke, jedinične cene artikla na dan naručivanja i količine naručenih artikala, 
+//		izračunaj i upiši plaćenu cenu za stavku. Cena se izračunava tako što se pomnoži jedinična cena sa količinom, 
+//		te se na dobijeni proizvod primeni procenat umanjenja stavke.
+
+rule "Rule g)"
+	agenda-group "discountItemFinal"
+    when
+		$i: Item($discounts : discountsItems, $maxDiscount : product.productCategory.maxDiscount)
+        $total : Number() 
+             from accumulate( DiscountItem($discount : discount) from $discounts,
+                              sum( $discount ) )
+    then
+    	if ($total.intValue() <= $maxDiscount)
+    			$i.setDiscount($total.intValue());
+    	else
+    		$i.setDiscount($maxDiscount);
+    	
+    	$i.setFinalPrice( $i.getOriginalPrice() * (1 - ( ($i.getDiscount() * 1.0 ) / 100) ) );
+    	System.out.println("Discount g)");
 end

@@ -69,7 +69,6 @@ public class ItemService {
 		kieSession.dispose(); 
 		
 		item = findMaxBasicDiscount(item);
-		item = setTotalDiscount(item);
 		return item;
 	}
 	
@@ -79,20 +78,6 @@ public class ItemService {
 		}
 	}
 
-	public Item setTotalDiscount(Item item){
-		int discount = 0;
-		for (DiscountItem di : item.getDiscountsItems()) {
-			discount = discount + di.getDiscount();
-		}
-		
-		ProductCategory pc = productCategoryRepository.findById(item.getProduct().getProductCategory().getId());
-		if (discount > pc.getMaxDiscount())
-			discount = pc.getMaxDiscount();
-		
-		item.setDiscount(discount);
-		return item;
-	}
-	
 	public Item findMaxBasicDiscount(Item item) {
 		int maxDiscount = -1;
 
@@ -117,6 +102,16 @@ public class ItemService {
 		cal.add(Calendar.DAY_OF_YEAR, -days); 
 		Date date = cal.getTime();
 		return date;
+	}
+
+	public Item getFinalPrice(Item item) {
+		KieSession kieSession = kieContainer.newKieSession();
+		kieSession.insert(item);
+		kieSession.getAgenda().getAgendaGroup("discountItemFinal").setFocus();
+		kieSession.fireAllRules();
+		kieSession.dispose(); 
+		
+		return item;
 	}
 
 }

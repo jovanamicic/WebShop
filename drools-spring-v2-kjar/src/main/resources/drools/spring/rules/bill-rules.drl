@@ -40,7 +40,7 @@ rule "Rule i)"
     	discount.setDiscount(1);
     	discount.setBill($b);
     	$b.getDiscountsBill().add(discount);
-    	System.out.println("BILL DISCOUNT i");
+    	System.out.println("Rule i)");
 end
 
 //Dodatni popust od 1% na ceo račun ukoliko je kupac pripada kategoriji srebrni kupci ili zlatni kupci (nagrađuju kupci sa posebnim privilegijama).
@@ -63,14 +63,39 @@ end
 rule "Rule k)"
 	agenda-group "discountBill"
     when
-        $b: Bill( originalTotalPrice > 50000)
+        $b: Bill( originalTotalPrice > 50000, items.size() >= 10)
     then
     	DiscountBill discount = new DiscountBill();
     	discount.setBasic(false);
     	discount.setDiscount(3);
     	discount.setBill($b);
     	$b.getDiscountsBill().add(discount);
-    	System.out.println("BILL DISCOUNT k");
+    	System.out.println("Rule k)");
+end
+
+//	1. Za račun saberi sve popuste (osnovni + svi dodatni).
+//	2. Potom se rezultat sabiranja popusta (izražen u procentima) upiše u polje procenat umanjenja
+//		za račun.
+//	3. Na osnovu procenata umanjenja računa i konačne cene za svaku stavku računa, izračunaj i
+//		upiši konačnu cenu računa. Cena se izračunava tako što se saberu sve konačne cene za svaku
+//		stavku, te se na dobijeni zbir primeni procenat umanjenja za račun.
+
+rule "Rule l"
+	agenda-group "discountBillFinal"
+    when
+		$b: Bill($discounts : discountsBill, $items: items)
+		
+		$total : Number() 
+             from accumulate( DiscountBill($discount : discount) from $discounts,
+                              sum( $discount ) )
+                              
+        $finalPriceSum : Number()
+        	from accumulate( Item($price : finalPrice) from $items,
+                              sum( $price) )
+    then
+    	$b.setDiscount($total.intValue());
+    	$b.setFinalPrice($finalPriceSum.doubleValue() * ( 1 - (($b.getDiscount() * 1.0) / 100) ) );
+    	System.out.println("Rule l)");
 end
 
 

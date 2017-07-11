@@ -80,4 +80,13 @@ public class BillService {
 		return repo.findByCustomerUsername(c);
 	}
 
+	public Bill getFinalPrice(Bill b) {
+		KieSession kieSession = kieContainer.newKieSession();
+		kieSession.insert(b);
+		kieSession.getAgenda().getAgendaGroup("discountBillFinal").setFocus();
+		kieSession.fireAllRules();
+		kieSession.dispose(); 
+		return b;
+	}
+
 }
