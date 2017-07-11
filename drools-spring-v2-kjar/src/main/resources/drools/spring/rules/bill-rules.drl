@@ -63,14 +63,20 @@ end
 rule "Rule k)"
 	agenda-group "discountBill"
     when
-        $b: Bill( originalTotalPrice > 50000, items.size() >= 10)
+        $b: Bill( $items : items)
+        $total : Number() 
+             from accumulate( Item($q : quantity) from $items,
+                              sum( $q ) )
     then
-    	DiscountBill discount = new DiscountBill();
-    	discount.setBasic(false);
-    	discount.setDiscount(3);
-    	discount.setBill($b);
-    	$b.getDiscountsBill().add(discount);
-    	System.out.println("Rule k)");
+    
+    	if ($b.getOriginalTotalPrice() > 50000 && $total.intValue() >= 10){
+	    	DiscountBill discount = new DiscountBill();
+	    	discount.setBasic(false);
+	    	discount.setDiscount(3);
+	    	discount.setBill($b);
+	    	$b.getDiscountsBill().add(discount);
+	    	System.out.println("Rule k)");
+    	}
 end
 
 //	1. Za račun saberi sve popuste (osnovni + svi dodatni).

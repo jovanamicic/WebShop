@@ -6,8 +6,8 @@ INSERT INTO `webshop`.`ccategory` (`name`) VALUES ('Gold');
 -- USERS
 INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `reg_date`, `role`, `surname`) VALUES ('MANAGER', 'mina', 'Mina', 'mina', '2017-06-01 00:34:11', 'manager', 'Medic');
 INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `reg_date`, `role`, `surname`) VALUES ('SELLER', 'kaca', 'Katarina', 'kaca', '2017-06-01 00:34:11', 'seller', 'Kaca');
-INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `reg_date`, `role`, `surname`, `points`, `address`, `ccategory`) VALUES ('CUSTOMER', 'voki', 'Voki', 'voki', '2017-06-01 00:34:01', 'customer', 'voki', '0', 'Pere Perica 12, Novi Sad', '2');
-INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `reg_date`, `role`, `surname`, `points`, `address`, `ccategory`) VALUES ('CUSTOMER', 'jo', 'Jovana', 'jo', '2017-06-01 00:34:01', 'customer', 'Micic', '0', 'Mike Antica 343, Beograd', '1');
+INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `reg_date`, `role`, `surname`, `points`, `address`, `ccategory`) VALUES ('CUSTOMER', 'voki', 'Voki', 'voki', '2014-06-01 00:34:01', 'customer', 'voki', '0', 'Pere Perica 12, Novi Sad', '2');
+INSERT INTO `webshop`.`user` (`discriminator`, `username`, `name`, `password`, `reg_date`, `role`, `surname`, `points`, `address`, `ccategory`) VALUES ('CUSTOMER', 'jo', 'Jovana', 'jo', '2017-06-01 00:34:01', 'customer', 'Micic', '0', 'Mike Antica 343, Beograd', '2');
 
 -- LIMIT
 INSERT INTO `webshop`.`limit_range` (`limit_id`, `discount`, `maximum`, `minimum`) VALUES ('1', '10', '5000', '1000');
@@ -45,6 +45,7 @@ INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minim
 INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('ASV1','2017-06-01 00:34:01', FALSE, '10', 'Votka Smirnoff classic', '1200', FALSE, '80', '6');
 INSERT INTO `webshop`.`product` (`product_id`,`creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('ASV2','2017-06-01 00:34:01', FALSE, '5', 'Votka Smirnoff Ice', '200', FALSE, '200', '6');
 INSERT INTO `webshop`.`product` (`product_id`, `creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('TV1', '2017-06-01 00:34:01', FALSE, '500', 'Samsung s509', '10000', FALSE, '900', '8');
+INSERT INTO `webshop`.`product` (`product_id`, `creation_date`, `deleted`, `minimum_in_stock`, `name`, `price`, `refill`, `stock`, `product_category`) VALUES ('TV2', '2017-06-01 00:34:01', FALSE, '50', 'Samsung s905', '500', FALSE, '49', '8');
 
 
 -- ACTION

@@ -144,7 +144,7 @@ function finish(){
 		url : "/bills/points/"+ usePoints,
 		data : JSON.stringify(bill),
 		success : function(data) {
-				sessionStorage.setItem('cart', JSON.stringify([]));
+				sessionStorage.removeItem('cart');
 				window.location.href = "/bill.html?id=" + billID;
 			},
 		error : function(e) {

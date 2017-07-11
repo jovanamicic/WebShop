@@ -81,7 +81,6 @@ public class BillController {
 			itemService.saveAllDiscountItems(item);
 			items.add(item);
 			originalPriceBill = originalPriceBill + (item.getOriginalPrice());
-			//finalPriceSum = finalPriceSum + item.getFinalPrice();
 		}
 
 		Set<Item> itemsSet = new HashSet<Item>(items);
@@ -90,8 +89,6 @@ public class BillController {
 		b.setOriginalTotalPrice(originalPriceBill);
 		b = billService.getDiscount(b);
 		b = billService.getFinalPrice(b);
-//		double finalPrice = finalPriceSum * (1 - ((double) b.getDiscount() / 100));
-//		b.setFinalPrice(finalPrice);
 		b = billService.getCoupons(b);
 		billService.save(b);
 
@@ -117,13 +114,14 @@ public class BillController {
 			} else {
 				bill.setCouponsSpent(bill.getFinalPrice());
 				bill.setFinalPrice(0.0);
-				c.setPoints((int) (customerPoints - bill.getFinalPrice()));
+				c.setPoints((int) (customerPoints - bill.getCouponsGained()));
 			}
 		} else {
 			bill.setCouponsSpent(0.0);
 		}
-
+		
 		bill.setState("ordered");
+		customerService.save(c);
 		billService.save(bill);
 
 		return new ResponseEntity<>(HttpStatus.OK);
