@@ -110,20 +110,15 @@ end
 rule "Rule f)"
    agenda-group "discountItem"
     when
-	$i: Item()
-	  Boolean( booleanValue ) 
-	     from accumulate( Action( $cat: categories )  from actions,
-	     init( boolean hasDiscount = false),
-	     action( for( Object obj: $cat )
-	               if( $i.getProduct().getProductCategory().getId() == (((ProductCategory)obj).getId())) hasDiscount = true;
-	               else hasDiscount = false; ),
-	     result( hasDiscount == true) )
+		$i: Item()
+		Action ( $cat: categories, $dis : discount) from actions
+		ProductCategory( id == $i.product.productCategory.getId() ) from  $cat     
     then
 		DiscountItem discount = new DiscountItem();
     	discount.setBill($i.getBill());
     	discount.setItem($i);
     	discount.setBasic(false);
-    	discount.setDiscount(1);
+    	discount.setDiscount($dis);
     	$i.getDiscountsItems().add(discount);  
     	System.out.println("Discount f)");  	
 end
